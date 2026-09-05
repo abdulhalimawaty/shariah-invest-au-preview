@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ASX Shariah Stock Screener (AAOIFI) — Shariah Invest AU</title>
+<meta name="description" content="184 ASX stocks screened against AAOIFI Standard No. 21 — 122 through the full ratio tests, 62 excluded on business activity, with the working shown.">
+<link rel="canonical" href="https://shariahinvestau.com.au/asx-screener/">
+<meta property="og:title" content="ASX Shariah Stock Screener — Shariah Invest AU">
+<meta property="og:description" content="184 ASX stocks screened against AAOIFI Shariah Standard No. 21, with the working shown for every verdict.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shariahinvestau.com.au/asx-screener/">
+<meta property="og:image" content="https://shariahinvestau.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="../">
+      <span class="mark" aria-hidden="true"></span>
+      Shariah Invest AU
+    </a>
+    <div class="sitenav-links">
+      <a href="./" aria-current="page">ASX Screener</a>
+      <a href="../super-funds/">Super Funds</a>
+      <a href="../guides/">Guides</a>
+      <a href="../methodology/">Methodology</a>
+      <a href="../zakat-calculator/">Zakat Calc</a>
+      <a href="../growth-calculator/">Growth Calc</a>
+      <a href="../home-finance/">Home Finance</a>
+    <a href="../tax-calculator/">Tax Calc</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="masthead masthead-tinted">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20"/><circle cx="12" cy="12" r="9"/></svg>
+      ASX Shariah Screener &middot; AAOIFI
+    </div>
+    <h1 class="title">Is this ASX stock Shariah-compliant?</h1>
+    <p class="subtitle">184 stocks screened against AAOIFI Shariah Standard No. 21 — 122 run through the full debt, cash and receivables tests, 62 excluded outright on business activity. Every figure sourced, every threshold shown, every judgment call explained rather than hidden behind a single badge.</p>
+    <div id="statStripWrap"><div class="stat-strip" id="statStrip"></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="controls">
+    <div class="search">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input type="text" id="searchInput" placeholder="Search ticker or company name…" aria-label="Search stocks">
+    </div>
+    <div class="chips" id="filterChips" role="group" aria-label="Filter by status"></div>
+  </div>
+
+  <p class="bar-legend">
+    The three bars on each row are <strong>debt</strong>, <strong>cash &amp; securities</strong> and
+    <strong>receivables</strong>, each as a share of market cap. The notch marks AAOIFI's 30&#37; limit —
+    a bar crossing it fails that test. Open any row for the exact figures.
+  </p>
+
+  <div class="list" id="list"></div>
+  <div class="empty" id="emptyState" hidden>No stocks match your search.</div>
+
+  <section class="info">
+    <h2>How the screen works</h2>
+    <p class="lede">Two independent tests, both drawn from AAOIFI Shariah Standard No. 21 — the framework most Islamic finance institutions and screening platforms build on. A stock has to clear both to be marked compliant.</p>
+    <div class="method-grid">
+      <div class="method-card">
+        <h3>1. Business activity</h3>
+        <p>The company's core business can't be conventional banking or insurance, alcohol, gambling, pork, adult content, weapons, or tobacco. This is a qualitative, sector-level check applied before any ratio math.</p>
+      </div>
+      <div class="method-card">
+        <h3>2. Financial ratios</h3>
+        <ul>
+          <li>Interest-bearing debt &lt; 30% of market cap</li>
+          <li>Cash &amp; interest-bearing securities &lt; 30% of market cap</li>
+          <li>Accounts receivable &lt; 30% of market cap — the ratio unique to AAOIFI, missing from most other screens</li>
+          <li>Impermissible income (interest, gambling, etc.) &lt; 5% of revenue</li>
+        </ul>
+      </div>
+    </div>
+    <div class="disclaimer">
+      <strong>What v1 still doesn't cover:</strong> AAOIFI's fourth test measures impermissible income (interest, gambling, etc.) directly from segment revenue disclosures, which most companies don't break out cleanly — that test is currently approximated via the business-activity screen and spot checks rather than computed for every stock. Two patterns worth knowing: (1) companies like Computershare that explicitly disclose interest-type income as its own line — there, we used the real figure (23.4% of revenue, confirmed from FY26 results); (2) pre-revenue exploration companies (marked "review" among the miners above), where reported "revenue" is often just interest earned on capital-raise cash sitting in term deposits — a clean debt/cash/receivables screen completely misses this, since the balance sheet looks fine while the income composition doesn't. Debt, cash and receivables — the three ratios AAOIFI actually computes from the balance sheet — are checked in full for every stock marked pass, fail or review. Receivables was only skipped for names that already fail on debt or cash, since one breach is enough to disqualify regardless. Treat "compliant" here as a strong, methodical first pass, not a fatwa. <strong>Coverage:</strong> the stocks above are hand-screened with live figures pulled September 2026, including names like Rio Tinto, Amcor, ResMed, Newmont and News Corp whose ASX line is a secondary listing — for those, figures are converted from their primary overseas exchange rather than skipped. The 15 names still queued below are almost all NZX-primary companies (Fisher &amp; Paykel Healthcare, Spark, Ryman, etc.) whose data isn't available through this build's data source yet. Full criteria, thresholds and primary sources on the <a href="../methodology/">Methodology page</a>. The cash and receivables ratios shown per stock also double as a starting point for <a href="../guides/zakat-on-asx-shares/">calculating zakat on shares you hold directly</a>. <strong>This is an educational tool, not financial or religious advice</strong> — verify independently and consult a qualified scholar before acting on it.
+    </div>
+    <h2 style="margin-top:40px;">Not yet screened</h2>
+    <p class="lede">Business-activity pass/fail is quick to apply; the financial ratios need real balance-sheet data per company, which is the slow part. These are queued for the next pass — search above works across this list too.</p>
+    <div class="unscreened-list" id="unscreenedList"></div>
+  </section>
+
+  <footer class="info-foot">
+    <span>Data pulled from public filings, September 2026.</span>
+    <span>Methodology: AAOIFI Shariah Standard No. 21 (debt &amp; liquidity ratios).</span>
+  </footer>
+</div>
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap">
+    <span>Educational information, not personal financial or religious advice. Verify independently and consult a qualified scholar before acting.</span>
+    <span><a href="../methodology/">Methodology</a> &middot; <a href="../zakat-calculator/">Zakat Calc</a> &middot; <a href="../growth-calculator/">Growth Calc</a> &middot; <a href="../home-finance/">Home Finance</a> &middot; <a href="../tax-calculator/">Tax Calc</a> &middot; <a href="../privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/screener.js"></script>
+</body>
+</html>

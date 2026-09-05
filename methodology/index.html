@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology — How We Screen for Shariah Compliance</title>
+<meta name="description" content="The exact AAOIFI criteria used to screen every ASX stock on this site — business activity rules, financial ratio thresholds, and primary sources for every claim.">
+<link rel="canonical" href="https://shariahinvestau.com.au/methodology/">
+<meta property="og:title" content="Methodology — Shariah Invest AU">
+<meta property="og:description" content="The exact AAOIFI criteria used to screen every stock, with primary sources for every threshold.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://shariahinvestau.com.au/methodology/">
+<meta property="og:image" content="https://shariahinvestau.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="../">
+      <span class="mark" aria-hidden="true"></span>
+      Shariah Invest AU
+    </a>
+    <div class="sitenav-links">
+      <a href="../asx-screener/">ASX Screener</a>
+      <a href="../super-funds/">Super Funds</a>
+      <a href="../guides/">Guides</a>
+      <a href="./" aria-current="page">Methodology</a>
+      <a href="../zakat-calculator/">Zakat Calc</a>
+      <a href="../growth-calculator/">Growth Calc</a>
+      <a href="../home-finance/">Home Finance</a>
+    <a href="../tax-calculator/">Tax Calc</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="masthead masthead-tinted">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+      Methodology
+    </div>
+    <h1 class="title">Exactly how we decide what's compliant</h1>
+    <p class="subtitle">Every criterion below, with the primary source it comes from. No proprietary black-box scoring — if you disagree with a threshold, you can go read the same document we did.</p>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:36px;">
+
+  <section class="info" style="border-top:none; margin-top:0; padding-top:0;">
+    <h2>The standard: AAOIFI Shariah Standard No. 21</h2>
+    <p class="lede">There is no single global regulator for Islamic finance. We use the Accounting and Auditing Organisation for Islamic Financial Institutions (AAOIFI) Shariah Standard No. 21 — "Financial Paper (Shares and Bonds)" — because it's the strictest of the three mainstream frameworks and the one most Islamic financial institutions reference. Where we depart from it (approximations, gaps in data), we say so explicitly rather than quietly filling the gap.</p>
+  </section>
+
+  <section class="info">
+    <h2>1. Business activity screen</h2>
+    <p class="lede">A qualitative test, applied first. If a company's core business falls into any of the categories below, it's excluded regardless of its balance sheet — no ratio can offset a non-compliant core business.</p>
+    <div class="method-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="method-card"><h3>Excluded outright</h3><p>Conventional banking, insurance &amp; interest-based finance</p></div>
+      <div class="method-card"><h3>Excluded outright</h3><p>Alcohol production or retail</p></div>
+      <div class="method-card"><h3>Excluded outright</h3><p>Gambling &amp; wagering</p></div>
+      <div class="method-card"><h3>Excluded outright</h3><p>Pork &amp; non-halal food production</p></div>
+      <div class="method-card"><h3>Excluded outright</h3><p>Adult entertainment</p></div>
+      <div class="method-card"><h3>Excluded outright</h3><p>Weapons &amp; tobacco</p></div>
+    </div>
+    <p class="lede" style="margin-top:18px;">This list is consistent across AAOIFI, DJIM and MSCI — the three standards diverge on the financial ratios, not this qualitative list. See references below.</p>
+  </section>
+
+  <section class="info">
+    <h2>2. Financial ratio screen</h2>
+    <p class="lede">Three balance-sheet ratios, each checked against market capitalisation, plus one income-composition test. A company has to clear all four to pass.</p>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <tr><th>Test</th><th>Threshold</th><th>What it catches</th></tr>
+        <tr><td><strong>Interest-bearing debt</strong></td><td class="mono-cell">&lt; 30% of market cap</td><td class="muted-cell">Companies structurally dependent on conventional interest-based borrowing</td></tr>
+        <tr><td><strong>Cash &amp; interest-bearing securities</strong></td><td class="mono-cell">&lt; 30% of market cap</td><td class="muted-cell">Companies effectively functioning as cash/interest vehicles rather than operating businesses</td></tr>
+        <tr><td><strong>Accounts receivable</strong></td><td class="mono-cell">&lt; 30% of market cap</td><td class="muted-cell">Excess exposure to debt-like receivables — <strong style="color:var(--ink);">unique to AAOIFI</strong>, absent from DJIM and MSCI</td></tr>
+        <tr><td><strong>Impermissible income</strong></td><td class="mono-cell">&lt; 5% of revenue</td><td class="muted-cell">Interest income, gambling revenue or other non-compliant income mixed into an otherwise clean business</td></tr>
+      </table>
+    </div>
+    <div class="callout" style="background:var(--surface-2); border-radius:10px; padding:16px 18px; margin-top:20px; font-size:14px; line-height:1.6;">
+      <strong>What we actually compute today:</strong> debt, cash and receivables are checked in full for every stock marked pass, fail or review on the <a href="../asx-screener/">ASX Screener</a> (receivables is skipped only when a stock already fails on debt or cash — one breach is enough to disqualify regardless). The impermissible-income test is the one gap: most companies don't disclose interest-type income as a clean line item, so it's approximated via the business-activity screen plus spot checks where real data exists — see the <a href="../guides/computershare-margin-income-pre-revenue-miners/">Computershare finding</a> for a case where we did get the real number.
+    </div>
+  </section>
+
+  <section class="info">
+    <h2>How the three major standards compare</h2>
+    <p class="lede">AAOIFI isn't the only framework in use. Here's how it differs from the two other standards most global screening apps run on.</p>
+    <div class="data-table-wrap">
+      <table class="data-table">
+        <tr><th>Standard</th><th>Debt / market cap</th><th>Receivables test</th><th>Income-purity limit</th></tr>
+        <tr><td>AAOIFI</td><td class="mono-cell">&lt; 30%</td><td class="mono-cell">Yes, &lt; 30%</td><td class="mono-cell">&lt; 5% of revenue</td></tr>
+        <tr><td>Dow Jones Islamic Market (DJIM)</td><td class="mono-cell">&lt; 33%</td><td class="mono-cell">No</td><td class="mono-cell">&lt; 5% of revenue</td></tr>
+        <tr><td>MSCI Islamic</td><td class="mono-cell">&lt; 33.3%</td><td class="mono-cell">No</td><td class="mono-cell">&lt; 5% of revenue</td></tr>
+      </table>
+    </div>
+    <p class="lede" style="margin-top:12px;">Full explanation, including a real ASX example where the receivables test changes the answer, in our <a href="../guides/aaoifi-vs-djim-msci-shariah-screening-standards/">AAOIFI vs. DJIM vs. MSCI guide</a>.</p>
+  </section>
+
+  <section class="info">
+    <h2>Primary sources</h2>
+    <p class="lede">Read the actual methodology documents rather than taking our word for it:</p>
+    <div class="fund-grid" style="grid-template-columns:1fr;">
+      <div class="fund-card" style="flex-direction:row; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div style="flex:1 1 320px;">
+          <h3 style="font-size:16px;">AAOIFI Shariah screening methodology</h3>
+          <p class="desc">Presented by Dr. Hamed Merah, Secretary-General of AAOIFI, at the OIC Member States' Stock Exchanges Forum — the closest thing to a primary-source explanation of AAOIFI's own screening approach available outside AAOIFI's paid standards catalogue.</p>
+        </div>
+        <a class="cta" href="https://www.oicexchanges.org/files/1---shari-ah-screening-in-the-islamic-capital-markets-dr-hamed-merah-secretary-general-aaoifi.pdf" target="_blank" rel="noopener">Read the PDF →</a>
+      </div>
+      <div class="fund-card" style="flex-direction:row; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div style="flex:1 1 320px;">
+          <h3 style="font-size:16px;">S&amp;P Dow Jones Islamic Market Indices Methodology</h3>
+          <p class="desc">S&amp;P Dow Jones Indices' official, current methodology document for its Islamic Market and Shariah index families, including the full business-activity and financial-ratio screening rules (Appendix A).</p>
+        </div>
+        <a class="cta" href="https://www.spglobal.com/spdji/en/documents/methodologies/methodology-dj-islamic-market-indices.pdf" target="_blank" rel="noopener">Read the PDF →</a>
+      </div>
+      <div class="fund-card" style="flex-direction:row; align-items:center; flex-wrap:wrap; gap:16px;">
+        <div style="flex:1 1 320px;">
+          <h3 style="font-size:16px;">MSCI Islamic Index Series Methodology</h3>
+          <p class="desc">MSCI's official current methodology document, describing its business-activity and financial-ratio screens (Total Assets or Average Market Cap denominator, depending on series).</p>
+        </div>
+        <a class="cta" href="https://www.msci.com/indexes/documents/methodology/2_MSCI_Islamic_Index_Series_Methodology_20241030.pdf" target="_blank" rel="noopener">Read the PDF →</a>
+      </div>
+    </div>
+    <p class="lede" style="margin-top:20px;">Data on individual stocks (debt, cash, receivables, market cap) is pulled from company financial filings via stockanalysis.com, cross-checked against primary-listing figures for dual-listed stocks. Every figure is dated on the <a href="../asx-screener/">ASX Screener</a> and ages as companies report new results — we recommend treating anything more than two quarters old as due for a recheck.</p>
+  </section>
+
+  <div class="disclaimer">
+    This page is general education, not financial or religious advice. It describes the methodology this site applies, not a fatwa or a substitute for advice from a qualified scholar. AAOIFI's official standards, sold as a formal publication, are the authoritative primary text — the sources above are the closest legitimate public alternatives to that paywalled document.
+  </div>
+
+</div>
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap">
+    <span>Educational information, not personal financial or religious advice. Verify independently and consult a qualified scholar before acting.</span>
+    <span><a href="./">Methodology</a> &middot; <a href="../zakat-calculator/">Zakat Calc</a> &middot; <a href="../growth-calculator/">Growth Calc</a> &middot; <a href="../home-finance/">Home Finance</a> &middot; <a href="../tax-calculator/">Tax Calc</a> &middot; <a href="../privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+</body>
+</html>

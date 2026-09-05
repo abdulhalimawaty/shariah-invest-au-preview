@@ -1,0 +1,10 @@
+# OS / editor junk
+Thumbs.db
+desktop.ini
+.DS_Store
+*.swp
+
+# Nothing else is ignored on purpose: this folder is the deployable site, so what is
+# committed here is exactly what gets published. Build scripts live in
+# ../shariah-invest-au-build/ and internal docs in ../shariah-invest-au-docs/ so they
+# are never served publicly.

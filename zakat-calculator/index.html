@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zakat Calculator (Australia) — Cash, Gold, ASX Shares & Assets</title>
+<meta name="description" content="Calculate zakat on cash, gold and silver, ASX shares and other assets — including a precise cash+receivables estimate for any stock in our AAOIFI screener.">
+<link rel="canonical" href="https://shariahinvestau.com.au/zakat-calculator/">
+<meta property="og:title" content="Zakat Calculator — Shariah Invest AU">
+<meta property="og:description" content="Calculate zakat on cash, gold, ASX shares and other assets against the current nisab threshold.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shariahinvestau.com.au/zakat-calculator/">
+<meta property="og:image" content="https://shariahinvestau.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="../">
+      <span class="mark" aria-hidden="true"></span>
+      Shariah Invest AU
+    </a>
+    <div class="sitenav-links">
+      <a href="../asx-screener/">ASX Screener</a>
+      <a href="../super-funds/">Super Funds</a>
+      <a href="../guides/">Guides</a>
+      <a href="../methodology/">Methodology</a>
+      <a href="./" aria-current="page">Zakat Calc</a>
+      <a href="../growth-calculator/">Growth Calc</a>
+      <a href="../home-finance/">Home Finance</a>
+    <a href="../tax-calculator/">Tax Calc</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="masthead masthead-tinted">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+      Zakat Calculator
+    </div>
+    <h1 class="title">Calculate your zakat</h1>
+    <p class="subtitle">Cash, gold &amp; silver, ASX shares and other assets, checked against the current nisab threshold. For shares, enter a ticker and we'll pull the cash &amp; receivables ratio straight from our own screener where we have it.</p>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:32px;">
+
+  <div class="calc-card">
+    <div class="calc-section-title">Cash, gold &amp; silver</div>
+    <p class="hint" style="margin-bottom:16px;">Straightforward zakatable assets — no calculation method to choose.</p>
+    <div class="calc-grid-2">
+      <div class="calc-field">
+        <label for="inCash">Cash &amp; bank savings (AUD)</label>
+        <input type="number" id="inCash" class="calc-input" placeholder="0.00" min="0" step="0.01">
+      </div>
+      <div class="calc-field">
+        <label for="inGoldSilver">Gold &amp; silver you own — market value (AUD)</label>
+        <input type="number" id="inGoldSilver" class="calc-input" placeholder="0.00" min="0" step="0.01">
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-section-title">ASX shares</div>
+    <p class="hint" style="margin-bottom:16px;">For each holding, choose <strong>full market value</strong> (the simpler, widely-accepted method) or <strong>precise method</strong> (cash + receivables only) if we recognise the ticker. See our <a href="../guides/zakat-on-asx-shares/">zakat on ASX shares guide</a> for which one applies to you.</p>
+    <div id="shareRows"></div>
+    <button type="button" id="addShareBtn" class="calc-add">+ Add a holding</button>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-section-title">Other assets &amp; liabilities</div>
+    <div class="calc-grid-2">
+      <div class="calc-field">
+        <label for="inOther">Other zakatable assets (AUD)</label>
+        <input type="number" id="inOther" class="calc-input" placeholder="0.00" min="0" step="0.01">
+        <div class="hint">Business inventory, money owed to you that you expect to receive, managed funds not already counted above.</div>
+      </div>
+      <div class="calc-field">
+        <label for="inLiabilities">Debts &amp; liabilities due now (AUD)</label>
+        <input type="number" id="inLiabilities" class="calc-input" placeholder="0.00" min="0" step="0.01">
+        <div class="hint">Short-term debts due, not your total mortgage or long-term loan balance. If you're working through interest-based debt, see our <a href="../guides/paying-off-interest-based-debt/">payoff guide</a>.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="calc-card">
+    <div class="calc-section-title">Nisab threshold</div>
+    <div class="calc-field">
+      <label for="inNisabStandard">Nisab standard</label>
+      <select id="inNisabStandard" class="calc-input">
+        <option value="silver" selected>Silver — 612.36g (commonly recommended)</option>
+        <option value="gold">Gold — 85g</option>
+      </select>
+      <div class="hint">We fetch today's metal price automatically and work out the nisab threshold for you — no need to look anything up.</div>
+    </div>
+    <details class="nisab-guide">
+      <summary>New to this? Which standard should I use?</summary>
+      <p>Nisab — the minimum wealth threshold before zakat is due — is traditionally set using either gold (85g) or silver (612.36g) as the reference metal. In today's market these give very different dollar thresholds, because gold is worth far more per gram than silver.</p>
+      <p><strong>Silver gives a lower threshold.</strong> More people whose wealth has grown end up liable for zakat, which better serves zakat's purpose of transferring wealth to those in need — this is why most contemporary scholars and zakat organisations recommend it as the default.</p>
+      <p><strong>Gold gives a higher threshold</strong> and is the more classical primary reference in some traditional texts. Some scholars prefer it, particularly when a person's wealth is mostly held in gold itself.</p>
+      <p>Both are recognised, valid positions — this isn't a case of one being wrong. This calculator defaults to silver; switch the dropdown above if you'd rather use gold, or ask your own trusted scholar if you're unsure which applies to you.</p>
+    </details>
+    <div id="nisabLive" class="nisab-live">
+      <div class="calc-match warn">Fetching today's price…</div>
+    </div>
+  </div>
+
+  <button type="button" id="calcBtn" class="calc-submit">Calculate zakat</button>
+
+  <div class="calc-result" id="calcResult" hidden>
+    <h2 style="font-size:20px;">Result</h2>
+    <div class="calc-result-grid">
+      <div class="calc-result-item"><div class="k">Total zakatable wealth</div><div class="v" id="resTotal">$0.00</div></div>
+      <div class="calc-result-item"><div class="k">Nisab threshold</div><div class="v" id="resNisab">—</div></div>
+      <div class="calc-result-item"><div class="k">From ASX shares</div><div class="v" id="resShares">$0.00</div></div>
+      <div class="calc-result-item"><div class="k">Zakat due (2.5%)</div><div class="v" id="resDue">—</div></div>
+    </div>
+    <div class="calc-verdict" id="resVerdict"></div>
+  </div>
+
+  <div class="disclaimer" style="margin-top:32px;">
+    This calculator applies AAOIFI Shariah Standard No. 35's general framework and is for education only — not a fatwa, and not personalised religious or financial advice. It doesn't account for every asset class (superannuation, property held for resale, business partnerships, debts owed to you that may not be collectible) or every scholarly position on method and nisab. For anything beyond a simple estimate, or if the amounts involved are significant, consult a qualified scholar. See our <a href="../guides/zakat-on-asx-shares/">zakat guide</a> for the reasoning behind the share calculation methods.
+  </div>
+
+</div>
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap">
+    <span>Educational information, not personal financial or religious advice. Verify independently and consult a qualified scholar before acting.</span>
+    <span><a href="../methodology/">Methodology</a> &middot; <a href="../zakat-calculator/">Zakat Calc</a> &middot; <a href="../growth-calculator/">Growth Calc</a> &middot; <a href="../home-finance/">Home Finance</a> &middot; <a href="../tax-calculator/">Tax Calc</a> &middot; <a href="../privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="../assets/data.js"></script>
+<script src="../assets/zakat-calc.js"></script>
+</body>
+</html>

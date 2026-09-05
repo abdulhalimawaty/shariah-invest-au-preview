@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Income Tax &amp; Take-Home Pay Calculator (Australia)</title>
+<meta name="description" content="Work out your real Australian take-home pay — income tax, Medicare levy, HECS-HELP and super — broken down bracket by bracket, not just a final number.">
+<link rel="canonical" href="https://shariahinvestau.com.au/tax-calculator/">
+<meta property="og:title" content="Income Tax &amp; Take-Home Pay Calculator — Shariah Invest AU">
+<meta property="og:description" content="Work out your real Australian take-home pay, broken down bracket by bracket.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shariahinvestau.com.au/tax-calculator/">
+<meta property="og:image" content="https://shariahinvestau.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="../">
+      <span class="mark" aria-hidden="true"></span>
+      Shariah Invest AU
+    </a>
+    <div class="sitenav-links">
+      <a href="../asx-screener/">ASX Screener</a>
+      <a href="../super-funds/">Super Funds</a>
+      <a href="../guides/">Guides</a>
+      <a href="../methodology/">Methodology</a>
+      <a href="../zakat-calculator/">Zakat Calc</a>
+      <a href="../growth-calculator/">Growth Calc</a>
+      <a href="../home-finance/">Home Finance</a>
+      <a href="./" aria-current="page">Tax Calc</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="masthead masthead-tinted">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="M7 16l4-4 3 3 5-6"/></svg>
+      Tax Calculator
+    </div>
+    <h1 class="title">Work out your real take-home pay</h1>
+    <p class="subtitle">Income tax, Medicare levy, HECS-HELP and super — broken down bracket by bracket, not just a final number. Knowing what's actually left over is the first step to working out what you can invest, save, or owe in zakat.</p>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:32px;">
+
+  <details class="nisab-guide" open>
+    <summary>New to this? How Australian income tax actually works</summary>
+    <p>The biggest misconception: <strong>your whole income is not taxed at your top rate.</strong> Australia uses marginal brackets — you pay 0% on the first $18,200, then 15% on the next slice, then 30% on the next, and so on. Only the portion of your income inside each bracket is taxed at that bracket's rate. Someone earning $90,000 doesn't pay 30% on all $90,000 — most of it sits in lower brackets taxed at 0% and 15%.</p>
+    <p><strong>Medicare levy</strong> is a separate 2% on top of income tax, funding Medicare. <strong>HECS-HELP</strong> is only relevant if you have a university/vocational study loan — it's not extra tax, it's compulsory repayment of your own debt once you earn above a threshold. <strong>Super</strong> is money your employer puts into your retirement account — by law, at least 12% of your salary, on top of what you're paid (unless your contract specifically says your package "includes" super, which is worth checking).</p>
+    <p>This calculator assumes you're an <strong>Australian resident for tax purposes, with no dependents</strong> — residency and family situation change the numbers, so if either applies to you, treat this as a rough guide and check the <a href="https://www.ato.gov.au" target="_blank" rel="noopener">ATO</a> or a tax agent for your exact figures.</p>
+  </details>
+
+  <div class="calc-card">
+    <div class="calc-section-title">Your income</div>
+    <div class="calc-grid-2">
+      <div class="calc-field">
+        <label for="txIncome">Annual gross salary (AUD)</label>
+        <input type="number" id="txIncome" class="calc-input" value="90000" min="0" step="500">
+        <div class="hint">Before any tax or deductions — your full salary as stated in your contract.</div>
+      </div>
+      <div class="calc-field">
+        <label for="txSuperMode">Does this include super?</label>
+        <select id="txSuperMode" class="calc-input">
+          <option value="on-top" selected>No — super is paid on top</option>
+          <option value="included">Yes — this is a "total package" figure</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="txHecs">Do you have a HECS-HELP or other study loan?</label>
+        <select id="txHecs" class="calc-input">
+          <option value="no" selected>No</option>
+          <option value="yes">Yes</option>
+        </select>
+      </div>
+      <div class="calc-field">
+        <label for="txCover">Do you have private hospital cover?</label>
+        <select id="txCover" class="calc-input">
+          <option value="yes" selected>Yes</option>
+          <option value="no">No</option>
+        </select>
+        <div class="hint">Affects the Medicare Levy Surcharge, which only applies above $105,000 without private hospital cover.</div>
+      </div>
+    </div>
+
+    <details class="nisab-guide" id="advancedSection">
+      <summary>Advanced: dependants, family situation &amp; salary sacrifice</summary>
+      <p>Having a spouse or dependent children raises your Medicare levy and surcharge thresholds — meaning you can earn more before either kicks in. This applies even without a partner: a sole parent with dependent children still gets the family threshold.</p>
+      <div class="calc-grid-2" style="margin-top:4px;">
+        <div class="calc-field">
+          <label for="txSpouse">Do you have a spouse or de facto partner?</label>
+          <select id="txSpouse" class="calc-input">
+            <option value="no" selected>No</option>
+            <option value="yes">Yes</option>
+          </select>
+        </div>
+        <div class="calc-field">
+          <label for="txChildren">Number of dependent children</label>
+          <input type="number" id="txChildren" class="calc-input" value="0" min="0" max="10" step="1">
+        </div>
+        <div class="calc-field" style="grid-column:1 / -1;">
+          <label for="txSacrifice">Extra pre-tax super contributions per year (salary sacrifice)</label>
+          <input type="number" id="txSacrifice" class="calc-input" value="0" min="0" step="100">
+          <div class="hint">Reduces your taxable income and adds directly to your super instead. Total concessional (pre-tax) super contributions — including the standard 12% — are capped at roughly $30,000/year; going over is taxed differently, so check the current cap on the ATO site before relying on a large figure here.</div>
+        </div>
+      </div>
+      <p style="margin-top:4px;">Note on accuracy: if you have a spouse, we apply the family Medicare/surcharge thresholds to <strong>your own income only</strong> — we don't ask for your partner's income, so this won't match a fully combined household assessment. For that, use the ATO's own calculator.</p>
+    </details>
+
+    <button type="button" id="txCalcBtn" class="calc-submit">Calculate take-home pay</button>
+  </div>
+
+  <div class="calc-result" id="txResult" hidden>
+    <h2 style="font-size:20px;">Where your income goes</h2>
+
+    <div class="tax-bar" id="taxBar"></div>
+    <div class="tax-legend" id="taxLegend"></div>
+
+    <div class="calc-result-grid" style="margin-top:24px;">
+      <div class="calc-result-item"><div class="k">Take-home pay (annual)</div><div class="v" id="txNet">$0</div></div>
+      <div class="calc-result-item"><div class="k">Take-home pay (weekly)</div><div class="v" id="txNetWeekly">$0</div></div>
+      <div class="calc-result-item"><div class="k">Effective tax rate</div><div class="v" id="txEffRate">0%</div></div>
+      <div class="calc-result-item"><div class="k">Your marginal rate</div><div class="v" id="txMargRate">0%</div></div>
+    </div>
+
+    <div class="calc-card" style="margin-top:24px; padding:28px 30px;">
+      <div class="calc-section-title" style="font-size:15px;">The exact breakdown</div>
+      <div class="data-table-wrap">
+        <table class="data-table" id="txBreakdownTable">
+          <thead><tr><th>Item</th><th>Amount</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="calc-card" style="margin-top:16px; padding:28px 30px;">
+      <div class="calc-section-title" style="font-size:15px;">Tax bracket by bracket</div>
+      <p class="hint" style="margin-bottom:12px;">This is the part most calculators hide — exactly how much of your income sits in each bracket, and what it's taxed at.</p>
+      <div class="data-table-wrap">
+        <table class="data-table" id="txBracketTable">
+          <thead><tr><th>Bracket</th><th>Rate</th><th>Amount in this bracket</th><th>Tax from this bracket</th></tr></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="calc-result-item" style="margin-top:16px; background:var(--surface-2); border-radius:12px;"><div class="k">Total super (12% guarantee + any salary sacrifice)</div><div class="v" id="txSuper">$0</div></div>
+    <div class="calc-match warn" id="txCapWarning" hidden style="margin-top:10px;">This total is above the roughly $30,000/year concessional (pre-tax) super cap — contributions above the cap are taxed differently. Check the current cap on the ATO site.</div>
+  </div>
+
+  <div class="disclaimer" style="margin-top:32px;">
+    Figures use financial-year 2026-27 individual resident tax brackets, Medicare levy, Medicare Levy Surcharge and HECS-HELP repayment rates as legislated. It models your own family/dependant Medicare and surcharge thresholds and salary-sacrificed super, but assumes an Australian resident for tax purposes with one employer, and doesn't factor in a spouse's separate income, multiple jobs, other tax offsets or deductions, or non-resident/working-holiday-maker rates. It's an estimate for planning purposes, not a substitute for the <a href="https://www.ato.gov.au" target="_blank" rel="noopener">ATO</a>, a registered tax agent, or your payslip.
+  </div>
+
+</div>
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap">
+    <span>Educational information, not personal financial or tax advice. Verify independently before acting.</span>
+    <span><a href="../methodology/">Methodology</a> &middot; <a href="../zakat-calculator/">Zakat Calc</a> &middot; <a href="../growth-calculator/">Growth Calc</a> &middot; <a href="../home-finance/">Home Finance</a> &middot; <a href="../tax-calculator/">Tax Calc</a> &middot; <a href="../privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="../assets/tax-calc.js"></script>
+</body>
+</html>

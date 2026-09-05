@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Investment Growth Calculator — Project Your Halal Portfolio</title>
+<meta name="description" content="See how regular contributions to a Shariah-compliant portfolio could grow over time, using your own assumed return rate — not a promised or interest-based figure.">
+<link rel="canonical" href="https://shariahinvestau.com.au/growth-calculator/">
+<meta property="og:title" content="Investment Growth Calculator — Shariah Invest AU">
+<meta property="og:description" content="Project how regular contributions could grow over time, using your own assumed return rate.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://shariahinvestau.com.au/growth-calculator/">
+<meta property="og:image" content="https://shariahinvestau.com.au/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap">
+<link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+<nav class="sitenav">
+  <div class="sitenav-inner">
+    <a class="sitenav-brand" href="../">
+      <span class="mark" aria-hidden="true"></span>
+      Shariah Invest AU
+    </a>
+    <div class="sitenav-links">
+      <a href="../asx-screener/">ASX Screener</a>
+      <a href="../super-funds/">Super Funds</a>
+      <a href="../guides/">Guides</a>
+      <a href="../methodology/">Methodology</a>
+      <a href="../zakat-calculator/">Zakat Calc</a>
+      <a href="./" aria-current="page">Growth Calc</a>
+      <a href="../home-finance/">Home Finance</a>
+    <a href="../tax-calculator/">Tax Calc</a>
+    </div>
+  </div>
+</nav>
+
+<main id="main">
+
+<div class="masthead masthead-tinted">
+  <div class="masthead-inner">
+    <div class="eyebrow">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3v18h18"/><path d="m19 9-5 5-4-4-3 3"/></svg>
+      Growth Calculator
+    </div>
+    <h1 class="title">Project your portfolio's growth</h1>
+    <p class="subtitle">Regular contributions, compounded over time, at a return rate you choose. This is a math tool for your own assumptions — not a projection tied to any interest-bearing product, and not a promise of return.</p>
+  </div>
+</div>
+
+<div class="wrap" style="padding-top:32px;">
+
+  <details class="nisab-guide" open>
+    <summary>New to investing? How to use this calculator</summary>
+    <p><strong>Starting amount</strong> is what you'd invest today. <strong>Monthly contribution</strong> is what you'd add every month after that — this is usually the part that matters most, more than the return rate. <strong>Time horizon</strong> is how many years you'll leave it invested; the longer it is, the more compounding does the work for you instead of your own contributions.</p>
+    <p><strong>Assumed annual return</strong> is the one you have to guess, so here's real context: over the 30 years to June 2026, Australian shares averaged about <strong>9.8% a year</strong>, and international shares performed similarly (<a href="https://fund-docs.vanguard.com/AU-Vanguard_Index_Chart_poster.pdf" target="_blank" rel="noopener">Vanguard's 2026 Index Chart</a>). That's a historical average across a broad market index, not a promise — and a Shariah-screened portfolio excludes whole sectors (banks, conventional REITs, most miners with heavy debt), so it can perform quite differently. If you're unsure what to enter, a more conservative <strong>6–8%</strong> is a reasonable starting point rather than assuming the historical average will repeat.</p>
+    <p>Whatever you enter, this stays a "what if" projection — real markets go up and down year to year, this chart just doesn't show that noise.</p>
+  </details>
+
+  <div class="calc-card">
+    <div class="calc-section-title">Your numbers</div>
+    <div class="calc-grid-2">
+      <div class="calc-field">
+        <label for="gStart">Starting amount (AUD)</label>
+        <input type="number" id="gStart" class="calc-input" value="5000" min="0" step="100">
+      </div>
+      <div class="calc-field">
+        <label for="gMonthly">Monthly contribution (AUD)</label>
+        <input type="number" id="gMonthly" class="calc-input" value="500" min="0" step="10">
+      </div>
+      <div class="calc-field">
+        <label for="gRate">Assumed annual return (%)</label>
+        <input type="number" id="gRate" class="calc-input" value="7" min="0" max="30" step="0.1">
+        <div class="hint">Your own assumption — not a rate we're promising or one tied to a specific product. See the guide above for real historical context before picking a number.</div>
+      </div>
+      <div class="calc-field">
+        <label for="gYears">Time horizon (years)</label>
+        <input type="number" id="gYears" class="calc-input" value="15" min="1" max="50" step="1">
+      </div>
+    </div>
+    <button type="button" id="gCalcBtn" class="calc-submit">Project growth</button>
+  </div>
+
+  <div class="calc-result" id="gResult" hidden>
+    <h2 style="font-size:20px;">Projection</h2>
+    <div class="calc-result-grid">
+      <div class="calc-result-item"><div class="k">Projected balance</div><div class="v" id="resFinal">$0</div></div>
+      <div class="calc-result-item"><div class="k">Total contributed</div><div class="v" id="resContributed">$0</div></div>
+      <div class="calc-result-item"><div class="k">Total growth</div><div class="v" id="resGrowth">$0</div></div>
+    </div>
+    <div class="calc-card" style="margin-top:20px;">
+      <svg id="growthChart" style="width:100%; height:auto; display:block;"></svg>
+      <div class="chart-readout" id="chartReadout">
+        <div class="cro-item"><span class="cro-k">Year</span><span class="cro-v" id="croYear">—</span></div>
+        <div class="cro-item"><span class="cro-k">Balance</span><span class="cro-v" id="croBalance">$0</span></div>
+        <div class="cro-item"><span class="cro-k">You contributed</span><span class="cro-v" id="croContributed">$0</span></div>
+        <div class="cro-item"><span class="cro-k">Growth from compounding</span><span class="cro-v" id="croGrowth">$0</span></div>
+      </div>
+      <p class="hint" style="margin-top:10px;">Move your cursor (or finger, on mobile) over the chart to see the balance at any point in time. Solid line: projected balance. Dashed line: total contributed. The shaded gap between them is compounding at work.</p>
+    </div>
+  </div>
+
+  <div class="disclaimer" style="margin-top:32px;">
+    This is a mathematical projection tool only, not financial advice and not a promise or guarantee of any return. It doesn't account for fees, taxes, inflation, or market volatility — real returns are never a smooth straight line the way this chart is. This calculator computes compound growth generically; it doesn't generate, promote or model interest-bearing (riba) products — pair it with your own Shariah-compliant investment choices, such as those on our <a href="../asx-screener/">ASX Screener</a>.
+  </div>
+
+</div>
+</main>
+
+<footer class="sitefooter">
+  <div class="wrap">
+    <span>Educational information, not personal financial or religious advice. Verify independently and consult a qualified scholar before acting.</span>
+    <span><a href="../methodology/">Methodology</a> &middot; <a href="../zakat-calculator/">Zakat Calc</a> &middot; <a href="../growth-calculator/">Growth Calc</a> &middot; <a href="../home-finance/">Home Finance</a> &middot; <a href="../tax-calculator/">Tax Calc</a> &middot; <a href="../privacy/">Privacy</a></span>
+  </div>
+</footer>
+
+<script src="../assets/growth-calc.js"></script>
+</body>
+</html>
