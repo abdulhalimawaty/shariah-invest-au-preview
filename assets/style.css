@@ -126,6 +126,21 @@ h1.title{font-size:clamp(38px,6vw,64px); font-weight:700; letter-spacing:-0.03em
 .search input:focus{outline:2px solid var(--accent); outline-offset:1px;}
 .search input::placeholder{color:var(--ink-muted); opacity:1;}
 .search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-muted);}
+/* Email capture. Inline at the end of content — never a modal or interstitial. */
+.email-capture{margin:44px 0 8px; padding:28px 30px; background:var(--surface-2); border-radius:18px; max-width:66ch;}
+.email-capture h2{font-size:19px; font-weight:700; color:var(--ink); margin:0 0 8px; letter-spacing:-0.01em;}
+.email-capture > p{font-size:14.5px; line-height:1.65; color:var(--ink-muted); margin:0 0 16px;}
+.email-capture-form{display:flex; gap:10px; flex-wrap:wrap;}
+.email-capture-form .calc-input{flex:1 1 240px; min-width:0;}
+.email-capture-form .btn{flex:none; white-space:nowrap;}
+.email-capture-fine{font-size:12.5px; line-height:1.6; color:var(--ink-muted); margin:12px 0 0;}
+@media (max-width:520px){
+  .email-capture{padding:22px 20px;}
+  .email-capture-form .btn{width:100%;}
+}
+/* Accessible label that stays available to screen readers. */
+.visually-hidden{position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; border:0;}
+
 /* Screener pagination controls. */
 .show-more-wrap{display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:22px 4px 8px;}
 .list-count{font-size:13.5px; color:var(--ink-muted); margin:0;}
