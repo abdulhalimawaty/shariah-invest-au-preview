@@ -50,6 +50,11 @@ async function loadNisab(){
     nisabState.status = 'failed';
   }
   renderNisabLive();
+
+  // If someone pressed Calculate while the price was still in flight, refresh that result
+  // now rather than leaving a "still fetching" message they'd have to clear themselves.
+  const resultEl = document.getElementById('calcResult');
+  if(resultEl && !resultEl.hidden) calculate();
 }
 
 function renderNisabLive(){
@@ -200,7 +205,11 @@ function calculate(){
   const verdictEl = document.getElementById('resVerdict');
   const dueEl = document.getElementById('resDue');
   if(nisab === null){
-    verdictEl.textContent = 'Enter today’s metal price above to check the nisab threshold.';
+    // Distinguish "still fetching" from "fetch failed" — during loading there is no manual
+    // input on screen yet, so telling someone to type a price would be misleading.
+    verdictEl.textContent = nisabState.status === 'loading'
+      ? 'Still fetching today’s metal price — one moment, then press Calculate again.'
+      : 'Enter today’s metal price above to check the nisab threshold.';
     verdictEl.className = 'calc-verdict warn';
     dueEl.textContent = '—';
   } else if(aboveNisab){
@@ -225,13 +234,9 @@ document.getElementById('calcBtn').addEventListener('click', calculate);
 
 const nisabStandardEl = document.getElementById('inNisabStandard');
 if(nisabStandardEl){
-  nisabStandardEl.addEventListener('change', () => {
-    loadNisab().then(() => {
-      // If a result is already on screen, keep it in step with the new standard.
-      const resultEl = document.getElementById('calcResult');
-      if(resultEl && !resultEl.hidden) calculate();
-    });
-  });
+  // loadNisab() re-runs calculate() itself if a result is on screen, so switching the
+  // standard keeps the displayed verdict in step with the selected metal.
+  nisabStandardEl.addEventListener('change', loadNisab);
 }
 
 renderShareRows();
