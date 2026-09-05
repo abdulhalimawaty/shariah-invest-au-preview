@@ -1,0 +1,44 @@
+# Netlify / Cloudflare Pages header rules.
+# If the site is hosted somewhere else, translate these to that host's config —
+# without them the browser has no caching guidance and every asset is re-fetched.
+
+/*
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Frame-Options: DENY
+  Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; font-src 'self'; script-src 'self'; connect-src 'self' https://api.gold-api.com https://open.er-api.com
+
+# HTML: always revalidate. Pages change whenever content is regenerated, and the
+# conditional request is cheap because the host serves an ETag.
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+# CSS/JS are NOT content-hashed, so a long immutable cache would strand visitors on a
+# stale stylesheet after a deploy. One hour is the honest ceiling until filenames are
+# fingerprinted (see POST_LAUNCH_PLAN.md — that's the upgrade path to a year-long cache).
+/assets/*.css
+  Cache-Control: public, max-age=3600, must-revalidate
+
+/assets/*.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Images and icons change rarely and are cheap to bust by renaming.
+/assets/*.png
+  Cache-Control: public, max-age=604800
+
+/assets/*.svg
+  Cache-Control: public, max-age=604800
+
+# Fonts are content-stable (the filename encodes family/style/subset) and are the single
+# biggest asset on the site, so they get the long immutable cache.
+/assets/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# NOTE: if analytics is switched on later (see add-analytics.js), the CSP above must gain
+#   script-src ... https://plausible.io
+#   connect-src ... https://plausible.io
+# or the beacon will be silently blocked.

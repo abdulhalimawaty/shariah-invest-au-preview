@@ -42,6 +42,7 @@ if(chipsEl){
     const btn = e.target.closest('.chip'); if(!btn) return;
     activeFilter = btn.dataset.k;
     [...chipsEl.children].forEach(c=>c.setAttribute('aria-pressed', c===btn));
+    visibleLimit = PAGE_SIZE;   // a new filter starts a fresh page
     render();
   });
 }
@@ -50,6 +51,7 @@ const searchInput = document.getElementById('searchInput');
 if(searchInput){
   searchInput.addEventListener('input', e=>{
     query = e.target.value.trim().toLowerCase();
+    visibleLimit = PAGE_SIZE;   // a new search starts a fresh page
     render();
   });
 }
@@ -95,6 +97,14 @@ function detailHtml(x){
   return `<div class="note">Business-activity and ratio screening hasn't been run on this stock yet. It's in the queue for the next data pass — check back, or search for a name we've already covered above.</div>`;
 }
 
+// Rendering all 199 rows up front pushed Largest Contentful Paint to ~8s on a throttled
+// phone: the browser kept re-attributing LCP to each later, larger paint as the list grew.
+// Showing a first page and revealing the rest on demand fixes that, and 199 rows was a lot
+// to scroll on mobile anyway. Search and filtering still run across the FULL dataset —
+// only the number of rows painted is capped.
+const PAGE_SIZE = 25;
+let visibleLimit = PAGE_SIZE;
+
 function render(){
   if(!listEl) return;
   let items = ALL.filter(x=> activeFilter==='all' || x.status===activeFilter);
@@ -102,6 +112,11 @@ function render(){
     items = items.filter(x=> x.t.toLowerCase().includes(query) || (x.n||'').toLowerCase().includes(query));
   }
   emptyEl.hidden = items.length>0;
+
+  const total = items.length;
+  const shown = Math.min(visibleLimit, total);
+  items = items.slice(0, shown);
+
   listEl.innerHTML = items.map(x=>{
     const meta = STATUS_META[x.status];
     return `<div class="row" data-open="false" data-t="${x.t}">
@@ -125,6 +140,30 @@ function render(){
     };
     head.addEventListener('click', toggle);
     head.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggle(); } });
+  });
+
+  renderShowMore(shown, total);
+}
+
+function renderShowMore(shown, total){
+  const wrap = document.getElementById('showMoreWrap');
+  if(!wrap) return;
+  if(shown >= total){
+    wrap.innerHTML = total > PAGE_SIZE
+      ? `<p class="list-count">Showing all ${total} stocks.</p>`
+      : '';
+    return;
+  }
+  wrap.innerHTML = `<p class="list-count">Showing ${shown} of ${total} stocks.</p>
+    <button type="button" class="btn btn-secondary" id="showMoreBtn">Show ${Math.min(PAGE_SIZE, total - shown)} more</button>
+    <button type="button" class="linklike" id="showAllBtn">Show all ${total}</button>`;
+  document.getElementById('showMoreBtn').addEventListener('click', ()=>{
+    visibleLimit += PAGE_SIZE;
+    render();
+  });
+  document.getElementById('showAllBtn').addEventListener('click', ()=>{
+    visibleLimit = Infinity;
+    render();
   });
 }
 

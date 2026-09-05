@@ -126,6 +126,15 @@ h1.title{font-size:clamp(38px,6vw,64px); font-weight:700; letter-spacing:-0.03em
 .search input:focus{outline:2px solid var(--accent); outline-offset:1px;}
 .search input::placeholder{color:var(--ink-muted); opacity:1;}
 .search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-muted);}
+/* Screener pagination controls. */
+.show-more-wrap{display:flex; align-items:center; gap:14px; flex-wrap:wrap; padding:22px 4px 8px;}
+.list-count{font-size:13.5px; color:var(--ink-muted); margin:0;}
+.show-more-wrap .btn{padding:9px 18px; font-size:13.5px;}
+
+/* Pointer from a reference guide back to the course lesson covering its prerequisite. */
+.learn-crosslink{background:var(--accent-soft); border-radius:10px; padding:11px 14px; font-size:13.5px; line-height:1.6; color:var(--ink-muted); margin:0 0 18px;}
+.learn-crosslink a{font-weight:600;}
+
 /* ============================ /learn/ course ============================ */
 
 .course-summary{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border-radius:16px; overflow:hidden; margin-bottom:28px;}
