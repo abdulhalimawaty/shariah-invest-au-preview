@@ -2,7 +2,12 @@ const ZAKAT_RATE = 0.025;
 
 // Nisab is defined by weight of metal, so we fetch a live spot price and convert to AUD.
 // gold-api returns USD per troy ounce; er-api gives the USD->AUD rate.
-const NISAB_GRAMS = { silver: 612.36, gold: 85 };
+// Classical nisab is 200 dirhams of silver and 20 mithqal (7.5 tola) of gold — a fixed
+// 7:1 weight ratio. Two conversions circulate: dirham 3.0618g gives 612.36g / 87.48g,
+// dirham 2.975g gives 595g / 85g. Either pair is defensible; mixing them is not.
+// This previously paired 612.36g silver with 85g gold (a 7.20:1 ratio), which understated
+// the gold threshold by ~2.8% relative to the silver figure shown beside it.
+const NISAB_GRAMS = { silver: 612.36, gold: 87.48 };
 const METAL_SYMBOL = { silver: 'XAG', gold: 'XAU' };
 const METAL_LABEL = { silver: 'Silver', gold: 'Gold' };
 const GRAMS_PER_TROY_OZ = 31.1034768;
@@ -107,6 +112,15 @@ function renderNisabLive(){
 let shareRows = [];
 let rowId = 0;
 
+// Row markup is built as a string, so anything the user typed has to be escaped before it
+// goes back into an attribute. Typing a double quote into the ticker field otherwise
+// terminates value="..." early and corrupts the rest of the row.
+function escAttr(s){
+  return String(s == null ? '' : s)
+    .replace(/&/g, '&amp;').replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
 function findStock(ticker){
   const t = ticker.trim().toUpperCase();
   if(!t) return null;
@@ -145,9 +159,9 @@ function renderShareRows(){
     }
     return `<div class="calc-row" data-id="${r.id}">
       <div class="calc-row-grid">
-        <input type="text" class="calc-input ticker-input" placeholder="Ticker e.g. BHP" value="${r.ticker}" data-field="ticker" maxlength="6">
-        <input type="number" class="calc-input" placeholder="Market value (AUD)" value="${r.value}" data-field="value" min="0" step="0.01">
-        <select class="calc-input" data-field="method">
+        <input type="text" class="calc-input ticker-input" placeholder="Ticker e.g. BHP" value="${escAttr(r.ticker)}" data-field="ticker" maxlength="6" aria-label="ASX ticker">
+        <input type="number" class="calc-input" placeholder="Market value (AUD)" value="${escAttr(r.value)}" data-field="value" min="0" step="0.01" aria-label="Market value in AUD">
+        <select class="calc-input" data-field="method" aria-label="Valuation method for this holding">
           <option value="full" ${r.method==='full'?'selected':''}>Full market value</option>
           <option value="precise" ${r.method==='precise'?'selected':''} ${zakatable===null?'disabled':''}>Precise method (cash+receivables)</option>
         </select>
@@ -173,14 +187,15 @@ function renderShareRows(){
 }
 
 function calculate(){
-  const cash = parseFloat(document.getElementById('inCash').value) || 0;
-  const goldSilver = parseFloat(document.getElementById('inGoldSilver').value) || 0;
-  const otherAssets = parseFloat(document.getElementById('inOther').value) || 0;
-  const liabilities = parseFloat(document.getElementById('inLiabilities').value) || 0;
+  const cash = amount('inCash');
+  const goldSilver = amount('inGoldSilver');
+  const otherAssets = amount('inOther');
+  const liabilities = amount('inLiabilities');
 
   let sharesTotal = 0;
   shareRows.forEach(r => {
-    const value = parseFloat(r.value) || 0;
+    const parsed = parseFloat(r.value);
+    const value = (isFinite(parsed) && parsed > 0) ? parsed : 0;
     const stock = findStock(r.ticker);
     if(r.method === 'precise' && stock && stock.recv !== undefined){
       const pct = (stock.cash + stock.recv) / 100;
@@ -226,7 +241,20 @@ function calculate(){
 }
 
 function formatAUD(n){
-  return '$' + n.toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+  // Sign goes before the symbol: "-$5,000.00", not "$-5,000.00".
+  const v = Number(n);
+  if(!isFinite(v)) return '$0.00';
+  const body = Math.abs(v).toLocaleString('en-AU', {minimumFractionDigits:2, maximumFractionDigits:2});
+  return (v < 0 ? '-$' : '$') + body;
+}
+
+// Every money field here is an amount you hold or owe, so it can't be negative and can't
+// be Infinity (which "1e999" parses to and would render as "$∞"). The min="0" attributes
+// on the inputs are only a hint — a typed or pasted negative still reaches this code.
+function amount(id){
+  const el = document.getElementById(id);
+  const v = parseFloat(el && el.value);
+  return (isFinite(v) && v > 0) ? v : 0;
 }
 
 document.getElementById('addShareBtn').addEventListener('click', addShareRow);

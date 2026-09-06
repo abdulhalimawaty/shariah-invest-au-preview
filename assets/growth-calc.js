@@ -1,5 +1,32 @@
 function formatAUD2(n){
-  return '$' + Math.round(n).toLocaleString('en-AU');
+  const v = Number(n);
+  if(!isFinite(v)) return '$0';
+  // Sign before the symbol: "-$1,200", not "$-1,200".
+  return (v < 0 ? '-$' : '$') + Math.abs(Math.round(v)).toLocaleString('en-AU');
+}
+
+/*
+  Reads a number, clamped to the min/max the input itself declares.
+
+  min/max on a number input are not enforced for a plain type="button" handler — nothing
+  validates the form — so a typed 9999 in "years" reached computeSeries and built a
+  120,000-point SVG path, which hangs the tab. Reading the bounds off the element instead
+  of hardcoding them here keeps the JS from drifting from the markup.
+
+  A value that had to be clamped is written back to the field, so the projection on screen
+  always matches the numbers the inputs are showing.
+*/
+function readNum(id, fallback){
+  const el = document.getElementById(id);
+  if(!el) return fallback;
+  let v = parseFloat(el.value);
+  if(!isFinite(v)) v = fallback;
+  const min = parseFloat(el.getAttribute('min'));
+  const max = parseFloat(el.getAttribute('max'));
+  if(isFinite(min) && v < min) v = min;
+  if(isFinite(max) && v > max) v = max;
+  if(String(v) !== el.value) el.value = String(v);
+  return v;
 }
 
 function formatAxis(v){
@@ -29,7 +56,9 @@ function drawChart(points){
   const w = 640, h = 300, padL = 60, padB = 34, padT = 16, padR = 16;
   const plotW = w - padL - padR, plotH = h - padT - padB;
   const totalYears = points[points.length-1].year;
-  const maxVal = Math.max(...points.map(p => p.balance));
+  // Loop rather than Math.max(...spread): a long series would overflow the argument limit.
+  let maxVal = 0;
+  for(const p of points) if(p.balance > maxVal) maxVal = p.balance;
   const niceMax = Math.ceil(maxVal / Math.pow(10, Math.floor(Math.log10(maxVal || 1)))) * Math.pow(10, Math.floor(Math.log10(maxVal || 1)));
   const yMax = niceMax > 0 ? niceMax : 1;
   const xFor = (year) => padL + (year / totalYears) * plotW;
@@ -159,12 +188,11 @@ function resetHover(){
 }
 
 function calculateGrowth(){
-  const start = parseFloat(document.getElementById('gStart').value) || 0;
-  const monthly = parseFloat(document.getElementById('gMonthly').value) || 0;
-  const rate = parseFloat(document.getElementById('gRate').value) || 0;
-  const years = parseInt(document.getElementById('gYears').value) || 0;
-
-  if(years <= 0){ return; }
+  const start = readNum('gStart', 0);
+  const monthly = readNum('gMonthly', 0);
+  const rate = readNum('gRate', 0);
+  // Clamped to the input's own min="1" max="50", so this can no longer be 0 or absurd.
+  const years = Math.round(readNum('gYears', 15));
 
   const points = computeSeries(start, monthly, rate, years);
   const final = points[points.length-1];
