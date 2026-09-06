@@ -126,6 +126,15 @@ h1.title{font-size:clamp(38px,6vw,64px); font-weight:700; letter-spacing:-0.03em
 .search input:focus{outline:2px solid var(--accent); outline-offset:1px;}
 .search input::placeholder{color:var(--ink-muted); opacity:1;}
 .search svg{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:15px; height:15px; color:var(--ink-muted);}
+/* Byline / attribution block, sits directly under the h1. */
+.byline{display:flex; align-items:center; gap:9px; flex-wrap:wrap; font-size:13px; color:var(--ink-muted); margin:10px 0 4px;}
+.byline-by{font-weight:600; color:var(--ink);}
+.byline-by a{color:var(--ink);}
+.byline-role{font-weight:400; color:var(--ink-muted);}
+.byline-sep{color:var(--border-strong);}
+.byline-how{color:var(--accent); font-weight:600;}
+.byline-unattributed{margin-top:8px;}
+
 /* Email capture. Inline at the end of content — never a modal or interstitial. */
 .email-capture{margin:44px 0 8px; padding:28px 30px; background:var(--surface-2); border-radius:18px; max-width:66ch;}
 .email-capture h2{font-size:19px; font-weight:700; color:var(--ink); margin:0 0 8px; letter-spacing:-0.01em;}
