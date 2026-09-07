@@ -189,7 +189,7 @@
         <div class="calc-field" style="grid-column:1 / -1;">
           <label for="txSacrifice">Extra pre-tax super contributions per year (salary sacrifice)</label>
           <input type="number" id="txSacrifice" class="calc-input" value="0" min="0" step="100">
-          <div class="hint">Reduces your taxable income and adds directly to your super instead. Total concessional (pre-tax) super contributions — including the standard 12% — are capped at roughly $30,000/year; going over is taxed differently, so check the current cap on the ATO site before relying on a large figure here.</div>
+          <div class="hint">Reduces your taxable income and adds directly to your super instead. Total concessional (pre-tax) super contributions — including the standard 12% — are capped at $32,500 for 2026&ndash;27 (up from $30,000, indexed from 1 July 2026). Going over is taxed differently.</div>
         </div>
       </div>
       <p style="margin-top:4px;">Note on accuracy: if you have a spouse, we apply the family Medicare/surcharge thresholds to <strong>your own income only</strong> — we don't ask for your partner's income, so this won't match a fully combined household assessment. For that, use the ATO's own calculator.</p>
@@ -233,11 +233,11 @@
     </div>
 
     <div class="calc-result-item" style="margin-top:16px; background:var(--surface-2); border-radius:12px;"><div class="k">Total super (12% guarantee + any salary sacrifice)</div><div class="v" id="txSuper">$0</div></div>
-    <div class="calc-match warn" id="txCapWarning" hidden style="margin-top:10px;">This total is above the roughly $30,000/year concessional (pre-tax) super cap — contributions above the cap are taxed differently. Check the current cap on the ATO site.</div>
+    <div class="calc-match warn" id="txCapWarning" hidden style="margin-top:10px;">This total is above the $32,500 concessional (pre-tax) super cap for 2026&ndash;27 — contributions above the cap are taxed differently. Check the current cap on the ATO site.</div>
   </div>
 
   <div class="disclaimer" style="margin-top:32px;">
-    Figures use financial-year 2026-27 individual resident tax brackets and the 12% super guarantee rate, both legislated. The Medicare levy low-income thresholds, Medicare Levy Surcharge tiers and HECS-HELP repayment thresholds are <strong>indexed figures</strong> — the rates and structure are legislated, but the exact dollar thresholds used here should be treated as current best figures rather than confirmed, and checked against the <a href="https://www.ato.gov.au" target="_blank" rel="noopener">ATO</a> if a threshold decides your result. The calculator models your own family/dependant thresholds and salary-sacrificed super, but assumes an Australian resident for tax purposes with one employer, and doesn't factor in a spouse's separate income, multiple jobs, other tax offsets or deductions, or non-resident/working-holiday-maker rates. It's an estimate for planning purposes, not a substitute for the ATO, a registered tax agent, or your payslip.
+    Figures use financial-year 2026&ndash;27 individual resident tax brackets, the 12% super guarantee, the $32,500 concessional contributions cap, the ATO's Medicare Levy Surcharge tiers and the marginal HECS-HELP repayment table — all checked against published ATO figures for this financial year. The one exception is the Medicare levy <em>low-income</em> shade-in thresholds, which are indexed and used here as current best figures. The calculator models your own family/dependant thresholds and salary-sacrificed super, but assumes an Australian resident for tax purposes with one employer, and doesn't factor in a spouse's separate income, multiple jobs, other tax offsets or deductions, or non-resident/working-holiday-maker rates. It's an estimate for planning purposes, not a substitute for the <a href="https://www.ato.gov.au" target="_blank" rel="noopener">ATO</a>, a registered tax agent, or your payslip.
   </div>
 
 </div>

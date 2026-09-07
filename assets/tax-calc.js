@@ -46,6 +46,16 @@ function medicareLevy(income, hasFamily, children){
   return income * 0.02;
 }
 
+/*
+  Medicare Levy Surcharge tiers, CONFIRMED against the ATO's legislated and indexed
+  FY2026-27 table (2026-09-07):
+    Base    singles <= 105,000    families <= 210,000    0%
+    Tier 1  105,001 – 123,000     210,001 – 246,000      1.0%
+    Tier 2  123,001 – 164,000     246,001 – 328,000      1.25%
+    Tier 3  164,001+              328,001+               1.5%
+  The family band widths below (+36,000 and +118,000) reproduce 246,000 and 328,000
+  exactly. The family threshold rises $1,500 for each dependent child after the first.
+*/
 function mlsThresholds(hasFamily, children){
   if(!hasFamily) return { base:105000, t1:123000, t2:164000 };
   const extra = Math.max(0, children - 1) * 1500;
@@ -71,9 +81,12 @@ function medicareLevySurcharge(income, hasFamily, children){
   Below it the marginal result is the smaller number, above it the 10% cap binds. The
   constant 9028.35 is the carried amount at T2: (129717 - 69528) x 0.15.
 
-  UNVERIFIED — see BUG_LOG.md. ato.gov.au returned 403 to automated fetches, and the only
-  other sources are secondary calculator sites. Worth confirming against the ATO directly
-  before launch, particularly whether the 10% cap survives in the marginal system.
+  CONFIRMED against the ATO's published FY2026-27 marginal repayment table (2026-09-07):
+    $0 – $69,528          nil
+    $69,529 – $129,717    15c per dollar over $69,528
+    $129,718 – $186,050   $9,028 + 17c per dollar over $129,717
+    $186,051 and over     flat 10% of total repayment income
+  The cap is real and this implementation matches it.
 */
 function hecsRepayment(income){
   const T1 = 69528, T2 = 129717, CAP = 186051;
@@ -138,7 +151,10 @@ function render(breakdown, superAmt, grossSalary){
   document.getElementById('txSuper').textContent = formatAUD(totalSuper);
   const capWarning = document.getElementById('txCapWarning');
   if(capWarning){
-    capWarning.hidden = totalSuper <= 30000;
+    // Concessional (pre-tax) cap indexed to $32,500 from 1 July 2026 — it was $30,000
+    // for FY2025-26. Non-concessional moved to $130,000 and bring-forward to $390,000,
+    // neither of which this calculator models.
+    capWarning.hidden = totalSuper <= 32500;
   }
 
   const rows = [['Gross salary', formatAUD(grossSalary)]];
